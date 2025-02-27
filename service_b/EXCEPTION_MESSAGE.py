@@ -1,0 +1,10 @@
+#MY_PROJECT_EXCEPTION_MESSAGE
+OWNER_NAME_LENGTH_ERROR = "owner_name must be between {min_length} and {max_length} characters."
+OWNER_NAME_CHAR_ERROR = "owner_name can only contain letters, numbers, and spaces."
+OWNER_NAME_EXISTING = "Owner name already exists"
+OWNER_NAME_NOT_NULL = "Owner could not be null"
+IMAGE_NOT_NULL ="Image could not be null"
+INVALID_IMAGE_ERROR = "Uploaded file is not a valid image."
+FILE_SIZE_ERROR = "File size must be between {min_size} and {max_size} MB."
+GRPC_CONNECTION_ERROR = "Failed to connect to the gRPC server. Please try again later."
+MONGO_CONNECTION_ERROR = "Can not connect to mongoDB"

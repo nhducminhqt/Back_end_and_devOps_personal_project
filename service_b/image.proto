@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+service ImageService {
+    rpc ProcessImage (ImageRequest) returns (ImageResponse);
+}
+
+message ImageRequest {
+    bytes image_data = 1;
+    string owner_name = 2;
+}
+
+message ImageResponse {
+    bool success = 1;
+    bytes flipped_image = 2;
+    string error_message = 3;
+}
