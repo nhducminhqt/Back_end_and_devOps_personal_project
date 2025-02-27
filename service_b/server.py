@@ -1,12 +1,12 @@
 import grpc
 from pymongo import errors
 from concurrent import futures
-import image_pb2 as image_pb2
-import image_pb2_grpc as image_pb2_grpc
+import boundary_test_and_image.image_pb2 as image_pb2
+import boundary_test_and_image.image_pb2_grpc as image_pb2_grpc
 from pymongo import MongoClient
 import io
 
-import EXCEPTION_MESSAGE as msg
+import boundary_test_and_image.EXCEPTION_MESSAGE as msg
 from PIL import Image
 
 

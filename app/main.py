@@ -4,14 +4,14 @@ from fastapi import FastAPI, HTTPException, File, Form, UploadFile
 from fastapi.responses import JSONResponse, StreamingResponse
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import grpc
-import image_pb2 as image_pb2
-import image_pb2_grpc as image_pb2_grpc
+import boundary_test_and_image.image_pb2 as image_pb2
+import boundary_test_and_image.image_pb2_grpc as image_pb2_grpc
 from io import BytesIO
 from typing import Union
-from image_video_detect import Detection
-from param_constraints import ParamConstraints
-from boundary_test_owner_name import boundary_test_owner_name 
-import EXCEPTION_MESSAGE as msg
+from boundary_test_and_image.image_video_detect import Detection
+from boundary_test_and_image.param_constraints import ParamConstraints
+from boundary_test_and_image.boundary_test_owner_name import boundary_test_owner_name 
+import boundary_test_and_image.EXCEPTION_MESSAGE as msg
 
 app = FastAPI()
 detection = Detection()
