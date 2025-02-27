@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  service_a:
+    build:
+      context: ./app  # Đường dẫn đến thư mục chứa Dockerfile của Service A
+    container_name: service_a_container
+    ports:
+      - "8188:8188"  # Ánh xạ cổng 8188 trên máy chủ đến cổng 8188 trong container
+    environment:
+      - GRPC_SERVER=service_b:50051  # Dịch vụ B, sẽ kết nối qua tên dịch vụ trong Docker network
+    depends_on:
+      - service_b  # Đảm bảo rằng Service A chỉ khởi động khi Service B đã sẵn sàng
+    restart: always  # Tự động khởi động lại container khi Docker daemon khởi động lại
+
+  service_b:
+    build:
+      context: ./service_b  # Đường dẫn đến thư mục chứa Dockerfile của Service B
+    container_name: service_b_container
+    ports:
+      - "50051:50051"  # Ánh xạ cổng 50051 trên máy chủ đến cổng 50051 trong container
+    environment:
+      - MONGO_URI=mongodb://mongodb_minh_nguyen_2:27017  # Kết nối đến MongoDB trong Docker network
+    depends_on:
+      - mongodb_minh_nguyen_2  # Đảm bảo rằng Service B chỉ khởi động khi MongoDB đã sẵn sàng
+    restart: always  # Tự động khởi động lại container khi Docker daemon khởi động lại
+
+  mongodb_minh_nguyen_2:
+    container_name: mongodb_minh_nguyen_2  # Đảm bảo sử dụng container MongoDB đã có
+    image: mongo:latest  # Sử dụng image MongoDB chính thức
+    ports:
+      - "27018:27017"  # Ánh xạ cổng 27018 trên máy chủ đến cổng 27017 trong container MongoDB
+    volumes:
+      - mongo_data:/data/db  # Lưu trữ dữ liệu MongoDB trên máy chủ
+    networks:
+      - default  # Thêm mạng mặc định để các dịch vụ có thể giao tiếp với nhau
+    restart: always  # Tự động khởi động lại container khi Docker daemon khởi động lại
+
+volumes:
+  mongo_data:
+    driver: local  # Sử dụng driver local cho volume MongoDB
